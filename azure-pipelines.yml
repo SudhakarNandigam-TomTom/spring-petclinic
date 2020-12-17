@@ -1,0 +1,22 @@
+variables:
+  - group: az-keyvault-connection-with-sp
+  
+pool:
+  vmImage: 'Ubuntu-18.04'
+
+resources:
+  repositories:
+  - repository: templates
+    type: github
+    name: tomtompilot/hcp3-pipeline-templates
+    ref: refs/heads/feature/build
+    endpoint: tomtompilot-templates
+
+stages:
+- stage: build
+  displayName: Build + Sonar
+  jobs:
+  - template: Services/jobs/maven-sonar-build.yml@templates
+    parameters:
+        sonarServiceConnection: 'hcp3-sonarqube'
+        sonarAccessToken: $(sonar-token)
