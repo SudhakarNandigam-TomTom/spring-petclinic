@@ -20,3 +20,4 @@ stages:
     parameters:
         sonarServiceConnection: 'hcp3-sonarqube'
         sonarAccessToken: $(sonar-token)
+        jdkVersionOption: '1.8'
